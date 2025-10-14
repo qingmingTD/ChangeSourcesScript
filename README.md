@@ -1,2 +1,2 @@
-# change-sources-script
-换源脚本
+# 换源脚本
+ubuntu
