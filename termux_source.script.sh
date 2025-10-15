@@ -1,37 +1,25 @@
 #!/bin/bash
 
 # 配置常量
-BACKUP_DIR="/etc/apt"
+BACKUP_DIR="$PREFIX/etc/apt"
 BACKUP_PREFIX="sources.list.bak."
-SYSTEM_NAME="Ubuntu 24.04 LTS"
-SYSTEM_VERSION="noble"
-SOURCES_FILE="/etc/apt/sources.list"
+SYSTEM_NAME="Termux"
+SYSTEM_VERSION="termux"
+SOURCES_FILE="$PREFIX/etc/apt/sources.list"
 # 如果需要管理员权限，设置 USE_SUDO=1；否则不设置或设为空
-USE_SUDO=1
+USE_SUDO=""
 # 包管理器
 PACKAGE_MANAGER="apt"
 # 镜像源列表 - 在此添加新源会自动在菜单中生成选项
 MIRRORS=(
-    "http://archive.ubuntu.com/ubuntu/|官方源"
-    "https://mirrors.tuna.tsinghua.edu.cn/ubuntu/|清华源"
-    "http://mirrors.aliyun.com/ubuntu/|阿里源"
-    "http://mirrors.tencent.com/ubuntu/|腾讯源"
-    # 示例：添加新源只需在这里增加一行
-    # "https://mirrors.ustc.edu.cn/ubuntu/|中科大源"
+    "https://packages.termux.dev/apt/termux-main|官方源"
+    "https://mirrors.tuna.tsinghua.edu.cn/termux/apt/termux-main|清华源"
+    "https://mirrors.aliyun.com/termux/termux-packages-24|阿里源"
 )
 # 源配置模板
-SOURCE_CONFIG_TEMPLATE='# Ubuntu ${SYSTEM_VERSION} 软件源 - ${mirror_url}
-deb ${mirror_url} ${SYSTEM_VERSION} main restricted universe multiverse
-deb ${mirror_url} ${SYSTEM_VERSION}-updates main restricted universe multiverse
-deb ${mirror_url} ${SYSTEM_VERSION}-backports main restricted universe multiverse
-deb ${mirror_url} ${SYSTEM_VERSION}-security main restricted universe multiverse
-
-# 源码源 (可选，默认注释)
-# deb-src ${mirror_url} ${SYSTEM_VERSION} main restricted universe multiverse
-# deb-src ${mirror_url} ${SYSTEM_VERSION}-updates main restricted universe multiverse
-# deb-src ${mirror_url} ${SYSTEM_VERSION}-backports main restricted universe multiverse
-# deb-src ${mirror_url} ${SYSTEM_VERSION}-security main restricted universe multiverse'
-
+SOURCE_CONFIG_TEMPLATE='# ${SYSTEM_NAME} ${SYSTEM_VERSION} 软件源 - ${mirror_url}
+deb ${mirror_url} stable main
+'
 # 网络连通性判断阈值(毫秒)
 CONNECTIVITY_THRESHOLD=300
 
